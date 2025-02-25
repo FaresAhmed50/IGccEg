@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 const FloatingWhatsAppIcon = () => {
     // WhatsApp link (replace with your actual WhatsApp number)
-    const whatsappLink = 'https://wa.me/1234567890'; // Example: https://wa.me/201234567890
+    const whatsappLink = 'https://api.whatsapp.com/send/?phone=%2B201102311320'; // Example: https://wa.me/201234567890
 
     // Handle click to open WhatsApp link
     const handleClick = () => {

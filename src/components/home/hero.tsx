@@ -56,7 +56,7 @@ const HomeHero: FC = () => {
 
 
   return (
-    <Box id="hero" sx={{ backgroundColor: 'background.paper', position: 'relative', pt: 4, pb: { xs: 8, md: 10 } }}>
+    <Box id="hero" sx={{ backgroundColor: 'background.paper', position: 'relative', pt: 4, pb: { xs: 8, md: 10 } , py:{xs:17, md:20 }}}>
       <Container maxWidth="lg">
         <Grid container spacing={0} sx={{ flexDirection: { xs: 'column', md: 'unset' } }}>
           <Grid item xs={12} md={7}>
@@ -118,7 +118,7 @@ const HomeHero: FC = () => {
                           mb: 2,
                           lineHeight: 1.6,
                           ml: { xs: 0},
-                          textAlign: isRtl ? 'right' : 'left',
+                          textAlign: isRtl ? 'left' : 'left',
                           direction: isRtl ? 'rtl' : 'ltr'
                       }}
                   >

@@ -22,9 +22,19 @@ const Header: FC = () => {
     const isRtl = locale === 'ar';
 
     return (
-        <Box sx={{ backgroundColor: 'background.paper' }}>
+        <Box
+            sx={{
+                backgroundColor: 'background.paper',
+                position: 'fixed', // Make the navbar static
+                top: 0, // Position at the top
+                left: 0, // Align to the left
+                width: '100%', // Full width
+                zIndex: 1100, // Ensure it stays above other content
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Optional: Add a shadow
+            }}
+        >
             <Container sx={{ py: { xs: 2, md: 3 } }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' , flexDirection: 'row-reverse' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: isRtl ? 'row-reverse' : 'row' }}>
                     {/* Logo */}
                     <Box sx={{ order: isRtl ? 2 : 1 }}>
                         <Logo />

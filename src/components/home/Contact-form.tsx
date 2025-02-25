@@ -46,14 +46,14 @@ const HomeNewsLetter: FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        
+
         try {
             const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzslKJcRQYEKEKR8IN1pnjFQWvVI-3eAZ5dPhYtuUTzKbtW4n8SDjVqsk9qlfTice2N/exec';
-            
+
             const url = new URL(GOOGLE_APPS_SCRIPT_URL);
             // Add formType parameter to indicate this is a contact form submission
             url.searchParams.append('formType', 'contact');
-            Object.keys(formData).forEach(key => 
+            Object.keys(formData).forEach(key =>
                 url.searchParams.append(key, formData[key as keyof typeof formData])
             );
 
@@ -115,7 +115,7 @@ const HomeNewsLetter: FC = () => {
                             onChange={handleChange}
                             required
                             InputLabelProps={{
-                                sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                             }}
                             sx={{
                                 '& .MuiInputBase-root': {
@@ -134,7 +134,7 @@ const HomeNewsLetter: FC = () => {
                             onChange={handleChange}
                             required
                             InputLabelProps={{
-                                sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                             }}
                             sx={{
                                 '& .MuiInputBase-root': {
@@ -152,7 +152,7 @@ const HomeNewsLetter: FC = () => {
                             onChange={handleChange}
                             required
                             InputLabelProps={{
-                                sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                             }}
                             sx={{
                                 '& .MuiInputBase-root': {
@@ -217,19 +217,19 @@ const HomeNewsLetter: FC = () => {
                                 }}
                             >
                                 {isLoading ? (
-                                    <Box sx={{ 
-                                        display: 'flex', 
+                                    <Box sx={{
+                                        display: 'flex',
                                         alignItems: 'center',
                                         gap: 2
                                     }}>
-                                        <CircularProgress 
-                                            size={20} 
-                                            sx={{ 
+                                        <CircularProgress
+                                            size={20}
+                                            sx={{
                                                 color: 'white',
                                                 marginRight: 1
-                                            }} 
+                                            }}
                                         />
-                                        <Typography sx={{ 
+                                        <Typography sx={{
                                             fontWeight: 'normal',
                                             fontSize: '1rem'
                                         }}>
@@ -263,8 +263,8 @@ const HomeNewsLetter: FC = () => {
                     alignItems: 'center',
                     gap: 2
                 }}>
-                    <CheckCircleIcon sx={{ 
-                        fontSize: 80, 
+                    <CheckCircleIcon sx={{
+                        fontSize: 80,
                         color: 'success.main',
                         mb: 2
                     }} />
@@ -274,7 +274,7 @@ const HomeNewsLetter: FC = () => {
                     <Typography variant="body1" sx={{ mb: 2 }}>
                         {t('successDescription')}
                     </Typography>
-                    <Button 
+                    <Button
                         onClick={handleCloseDialog}
                         variant="contained"
                         color="primary"

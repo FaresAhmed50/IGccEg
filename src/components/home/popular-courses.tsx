@@ -12,10 +12,8 @@ import IconArrowForward from '@mui/icons-material/ArrowForward';
 import useCourseData from './popular-course.data'; // Import the custom hook
 import { CourseCardItem } from '@/components/course';
 import { Course } from '@/interfaces/course';
-import {useTranslation} from "next-i18next";
-import {useRouter} from "next/router";
-
-
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 interface SliderArrowArrow {
     onClick?: () => void;
@@ -33,7 +31,17 @@ interface FormData {
 
 const SliderArrow: FC<SliderArrowArrow> = (props) => {
     const { onClick, type, className } = props;
+    const { t } = useTranslation('common');
+    const { locale } = useRouter();
+    const isRtl = locale === 'ar';
 
+    // Determine the arrow direction based on the type and RTL setting
+    const arrowIcon =
+        type === 'next' ? (
+            <IconArrowForward sx={{ fontSize: 22 }} />
+        ) : (
+            <IconArrowBack sx={{ fontSize: 22 }} />
+        );
 
     return (
         <IconButton
@@ -43,7 +51,7 @@ const SliderArrow: FC<SliderArrowArrow> = (props) => {
                 '&:hover': { backgroundColor: 'primary.main', color: 'primary.contrastText' },
                 bottom: { xs: '-70px !important', md: '-28px !important' },
                 left: 'unset !important',
-                right: type === 'prev' ? '60px !important' : '0 !important',
+                right: type === 'prev' ? (isRtl ? '0 !important' : '60px !important') : (isRtl ? '60px !important' : '0 !important'),
                 zIndex: 10,
                 boxShadow: 1,
             }}
@@ -52,7 +60,7 @@ const SliderArrow: FC<SliderArrowArrow> = (props) => {
             onClick={onClick}
             className={className}
         >
-            {type === 'next' ? <IconArrowForward sx={{ fontSize: 22 }} /> : <IconArrowBack sx={{ fontSize: 22 }} />}
+            {arrowIcon}
         </IconButton>
     );
 };
@@ -87,9 +95,9 @@ const HomePopularCourse: FC = () => {
     });
     const [isLoading, setIsLoading] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-    const { t } = useTranslation('common')
-    const { locale } = useRouter()
-    const isRtl = locale === 'ar'
+    const { t } = useTranslation('common');
+    const { locale } = useRouter();
+    const isRtl = locale === 'ar';
 
     // Use the custom hook to fetch data
     const { data } = useCourseData();
@@ -128,10 +136,10 @@ const HomePopularCourse: FC = () => {
 
         try {
             const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzslKJcRQYEKEKR8IN1pnjFQWvVI-3eAZ5dPhYtuUTzKbtW4n8SDjVqsk9qlfTice2N/exec';
-            
+
             const url = new URL(GOOGLE_APPS_SCRIPT_URL);
             url.searchParams.append('formType', 'program');
-            Object.keys(formData).forEach(key => 
+            Object.keys(formData).forEach(key =>
                 url.searchParams.append(key, formData[key as keyof typeof formData])
             );
 
@@ -189,20 +197,20 @@ const HomePopularCourse: FC = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: { xs: 'center', md: 'flex-start' },
-
                             }}
                         >
                             <Typography
                                 sx={{
-                                    color: 'text.secondary',
+                                    color: 'black',
                                     mb: 2,
                                     lineHeight: 1.6,
-                                    ml: { xs: 0},
-                                    textAlign: isRtl ? 'right' : 'left',
-                                    direction: isRtl ? 'rtl' : 'ltr'
+                                    ml: { xs: 0 },
+                                    textAlign: isRtl ? 'left' : 'left',
+                                    direction: isRtl ? 'rtl' : 'ltr',
+                                    fontSize: '2.25rem', // Increase font size (adjust as needed)
                                 }}
                             >
-                                { t('programDes.program13') }
+                                {t('programDes.program13')}
                             </Typography>
                         </Box>
                     </Grid>
@@ -238,8 +246,8 @@ const HomePopularCourse: FC = () => {
                     }}
                 >
                     {showSuccess ? (
-                        <Box sx={{ 
-                            width: '100%', 
+                        <Box sx={{
+                            width: '100%',
                             textAlign: 'center',
                             display: 'flex',
                             flexDirection: 'column',
@@ -248,7 +256,7 @@ const HomePopularCourse: FC = () => {
                             direction: isRtl ? 'rtl' : 'ltr'
                         }}>
                             <CheckCircleIcon color="success" sx={{ fontSize: 60 }} />
-                            <Typography variant="h5" sx={{ 
+                            <Typography variant="h5" sx={{
                                 color: 'success.main',
                                 textAlign: 'center',
                                 width: '100%'
@@ -276,14 +284,14 @@ const HomePopularCourse: FC = () => {
                                     mb: { xs: 3, md: 0 }
                                 }}
                             >
-                                <Typography variant="h5" sx={{ 
+                                <Typography variant="h5" sx={{
                                     mb: 2,
                                     textAlign: isRtl ? 'right' : 'left',
                                     direction: isRtl ? 'rtl' : 'ltr'
                                 }}>
                                     {selectedCourse?.title}
                                 </Typography>
-                                <Typography variant="body1" sx={{ 
+                                <Typography variant="body1" sx={{
                                     color: 'text.secondary',
                                     textAlign: isRtl ? 'right' : 'left',
                                     direction: isRtl ? 'rtl' : 'ltr'
@@ -294,8 +302,8 @@ const HomePopularCourse: FC = () => {
 
                             {/* Right Half - Form */}
                             <Box sx={{ flex: 1, pl: { md: 2 } }}>
-                                <Typography variant="h6" sx={{ 
-                                    mb: 3, 
+                                <Typography variant="h6" sx={{
+                                    mb: 3,
                                     textAlign: 'center',
                                     direction: isRtl ? 'rtl' : 'ltr'
                                 }}>
@@ -311,7 +319,7 @@ const HomePopularCourse: FC = () => {
                                         required
                                         sx={{ mb: 2 }}
                                         InputLabelProps={{
-                                            sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                            sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                                         }}
                                         inputProps={{
                                             style: { textAlign: isRtl ? 'right' : 'left' }
@@ -327,7 +335,7 @@ const HomePopularCourse: FC = () => {
                                         required
                                         sx={{ mb: 2 }}
                                         InputLabelProps={{
-                                            sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                            sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                                         }}
                                         inputProps={{
                                             style: { textAlign: isRtl ? 'right' : 'left' }
@@ -342,7 +350,7 @@ const HomePopularCourse: FC = () => {
                                         required
                                         sx={{ mb: 2 }}
                                         InputLabelProps={{
-                                            sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                            sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                                         }}
                                         inputProps={{
                                             style: { textAlign: isRtl ? 'right' : 'left' }
@@ -356,16 +364,16 @@ const HomePopularCourse: FC = () => {
                                         onChange={handleChange}
                                         sx={{ mb: 3 }}
                                         InputLabelProps={{
-                                            sx: { textAlign: isRtl ? 'right' : 'left', width: '100%' }
+                                            sx: { textAlign: isRtl ? 'left' : 'left', width: '100%' }
                                         }}
                                         inputProps={{
                                             style: { textAlign: isRtl ? 'right' : 'left' }
                                         }}
                                     />
-                                    <Button 
-                                        type="submit" 
-                                        variant="contained" 
-                                        fullWidth 
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        fullWidth
                                         disabled={isLoading}
                                         sx={{
                                             direction: isRtl ? 'rtl' : 'ltr'

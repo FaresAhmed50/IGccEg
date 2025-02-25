@@ -6,19 +6,14 @@ import { SocialLink } from '@/interfaces/social-link';
 export const socialLinks: SocialLink[] = [
     {
         name: 'Instagram',
-        link: '#',
-        icon: '/images/icons/instagram.svg',
+        link: 'https://www.linkedin.com/company/igcc-international-center-for-governance-and-consultancy/',
+        icon: '/images/icons/linkedin.png',
     },
     {
-        name: 'YouTube',
-        link: '#',
-        icon: '/images/icons/youtube.svg',
-    },
-    {
-        name: 'YouTube',
-        link: '#',
+        name: 'Facebook', // Corrected the name from 'YouTube' to 'Facebook'
+        link: 'https://www.facebook.com/profile.php?id=100046246285800',
         icon: '/images/icons/facebook.svg',
-    }
+    },
 ];
 
 interface SocialLinkItemProps {
@@ -57,15 +52,15 @@ const SocialLinkItem: FC<SocialLinkItemProps> = ({ item }) => (
             href={item.link}
         >
             {/* eslint-disable-next-line */}
-            <img src={item.icon} alt={item.name + 'icon'} />
+            <img src={item.icon} alt={item.name + ' icon'} />
         </Link>
     </Box>
 );
 
-// default
+// Default SocialLinks Component
 const SocialLinks: FC = () => {
     return (
-        <Box sx={{ ml: -1, textAlign: { xs: 'center', md: 'left' } }}> {/* Center on mobile, left-align on desktop */}
+        <Box sx={{ ml: -1, textAlign: { xs: 'center', md: 'left' } }}>
             <Box
                 component="ul"
                 sx={{
@@ -76,9 +71,19 @@ const SocialLinks: FC = () => {
                     listStyle: 'none',
                 }}
             >
-                {socialLinks.map((item) => {
-                    return <SocialLinkItem key={item.name} item={item} />;
-                })}
+                {socialLinks.map((item) => (
+                    <SocialLinkItem key={item.name} item={item} />
+                ))}
+            </Box>
+            <Box
+                sx={{
+                    width: 100,
+                    mt: 2, // Add margin-top for spacing
+                }}
+            >
+                <a href={"https://www.illustrav.com/"} target="_blank">
+                    <img src="https://res.cloudinary.com/dduxyvs3x/image/upload/v1735824579/illustraV_logo.svg" alt="Logo" />
+                </a>
             </Box>
         </Box>
     );

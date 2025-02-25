@@ -13,7 +13,7 @@ const HomeFeature: FC = () => {
   const isRtl = locale === 'ar'
 
   return (
-    <Box id="feature" sx={{ py: { xs: 10, md: 14 }, backgroundColor: 'background.paper' }}>
+    <Box id="feature" sx={{ xs: 10, md: 14 , backgroundColor: 'background.paper' }}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={5}>
@@ -67,7 +67,7 @@ const HomeFeature: FC = () => {
                 color: 'text.secondary',
                 mb: 2,
                 ml: { xs: 0, md: 4 },
-                textAlign: isRtl ? 'right' : 'left',
+                textAlign: isRtl ? 'left' : 'left',
                 direction: isRtl ? 'rtl' : 'ltr'
               }}
             >
@@ -77,9 +77,8 @@ const HomeFeature: FC = () => {
             <Typography
               sx={{
                 color: 'text.secondary',
-                mb: 2,
                 ml: { xs: 0, md: 4 },
-                textAlign: isRtl ? 'right' : 'left',
+                textAlign: isRtl ? 'left' : 'left',
                 direction: isRtl ? 'rtl' : 'ltr'
               }}
             >
