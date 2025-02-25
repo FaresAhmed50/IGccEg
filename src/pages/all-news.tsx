@@ -120,7 +120,7 @@ const AllNews: FC = () => {
                                                 cursor: 'pointer',
                                                 height: '100%',
                                             }}
-                                            onClick={(e) => {
+                                            onClick={(e: { preventDefault: () => void; }) => {
                                                 e.preventDefault(); // Prevent default link behavior
                                                 handleReadMoreClick(item.slug); // Handle click with loader
                                             }}
