@@ -34,7 +34,7 @@ const Header: FC = () => {
             }}
         >
             <Container sx={{ py: { xs: 2, md: 3 } }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection:  'row-reverse' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: isRtl ? 'row-reverse' : 'row' }}>
                     {/* Logo */}
                     <Box sx={{ order: isRtl ? 2 : 1 }}>
                         <Logo />

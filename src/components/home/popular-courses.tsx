@@ -189,14 +189,14 @@ const HomePopularCourse: FC = () => {
         >
             <Container maxWidth="lg">
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={3}>
+                    <Grid item xs={12} md={12}>
                         <Box
                             sx={{
                                 height: '100%',
-                                width: { xs: '100%', md: '90%' },
+                                width: { xs: '100%', md: '100%' },
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: { xs: 'center', md: 'flex-start' },
+                                justifyContent: { xs: 'center', md: 'center' },
                             }}
                         >
                             <Typography
@@ -215,7 +215,8 @@ const HomePopularCourse: FC = () => {
                         </Box>
                     </Grid>
 
-                    <Grid item xs={12} md={9}>
+                    {/*this is the cards part */}
+                    <Grid item xs={12} md={12}>
                         <Slider {...sliderConfig}>
                             {data.map((item) => (
                                 <Box key={String(item.id)} onClick={() => handleOpen(item)}>
@@ -224,6 +225,7 @@ const HomePopularCourse: FC = () => {
                             ))}
                         </Slider>
                     </Grid>
+
                 </Grid>
             </Container>
 
