@@ -71,7 +71,7 @@ const AllNews: FC = () => {
 
     return (
         <MainLayout>
-            <Box sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)' }}>
+            <Box sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)' , paddingTop: '40px' }}>
                 <Box sx={{ py: { xs: 6, md: 10 } }}>
                     <Container maxWidth="lg">
                         <Typography

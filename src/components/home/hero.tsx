@@ -28,8 +28,8 @@ const exps: Array<Exp> = [
         value: 20, // Final value for Quality Course
     },
     {
-        label: 'Experience Mentors',
-        value: 10, // Final value for Experience Mentors
+        label: 'Successful Consultations',
+        value: 50, // Final value for Experience Mentors
     },
 ];
 
@@ -91,6 +91,7 @@ const HomeHero: FC = () => {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
+
                             }}
                         >
                             <Box sx={{ mb: 3 }}>
@@ -102,6 +103,7 @@ const HomeHero: FC = () => {
                                         letterSpacing: 1.5,
                                         fontWeight: 'bolder',
                                         lineHeight: 1.3,
+
                                     }}
                                 >
                                     <Typography
@@ -113,6 +115,7 @@ const HomeHero: FC = () => {
                                             fontWeight: 'inherit',
                                             backgroundColor: 'unset',
                                             textAlign: isRtl ? 'right' : 'left',
+
                                         }}
                                     >
                                         {t('home.GetCertified')}{' '}
@@ -171,7 +174,7 @@ const HomeHero: FC = () => {
                                 allow="autoplay; picture-in-picture; clipboard-write; encrypted-media"
                                 width="450"
                                 height="450"
-                                style={{ border: 'none', margin: '10px', borderRadius: '10px' }}
+                                style={{ border: 'none', margin: '10px', borderRadius: '20px' , boxShadow: '10px 20px 20px rgba(0, 0, 0, 0.2)' }}
                                 title="IGCC EG - الحوكمة"
                             ></iframe>
                         </Box>

@@ -64,7 +64,7 @@ const NewsDetail: FC = () => {
 
     return (
         <MainLayout>
-            <Box component="article" sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)' }}>
+            <Box component="article" sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)' , paddingTop: '40px' }}>
                 <Box sx={{ py: { xs: 6, md: 10 } }}>
                     <Container maxWidth="lg">
                         <StyledPaper>

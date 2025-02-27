@@ -6,6 +6,8 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import {FooterSocialLinks} from "@/components/footer";
+import SocialLinks from "@/components/home/SocilaLiks";
 
 const HomeFeature: FC = () => {
   const { t } = useTranslation('common')
@@ -84,6 +86,18 @@ const HomeFeature: FC = () => {
             >
               {t('home.vision2030')}
             </Typography>
+          {/*  the social links app  */}
+              <Typography
+                  sx={{
+                      color: 'text.secondary',
+                      ml: { xs: 0, md: 4 },
+                      textAlign: isRtl ? 'left' : 'left',
+                      direction: isRtl ? 'rtl' : 'ltr',
+                      mt: 2
+                  }}
+              >
+                  <SocialLinks />
+              </Typography>
           </Grid>
         </Grid>
       </Container>
