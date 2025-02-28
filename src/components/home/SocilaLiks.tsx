@@ -5,19 +5,24 @@ import { SocialLink } from '@/interfaces/social-link';
 
 export const socialLinks: SocialLink[] = [
     {
-        name: 'Instagram',
-        link: '#',
+        name: 'Linkedin',
+        link: 'https://www.linkedin.com/in/dr-nourhan-hassan-igcc-international-center-for-governance-consulting-021a4b149?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
         icon: 'linkedin_black.png',
     },
     {
         name: 'Facebook', // Corrected the name from 'YouTube' to 'Facebook'
-        link: '#',
+        link: 'https://www.facebook.com/share/1F2cb9mmVq/',
         icon: 'facebook-_black.png',
     },
     {
         name: 'X',
-        link: 'https://x.com/',
+        link: ' https://x.com/NourhanMHassan1?t=kTdF6w9Mj0YyrRWSu6gAAw&s=08',
         icon: 'twitter.png',
+    },
+    {
+        name: 'insta',
+        link: 'https://www.instagram.com/nourhan142022?igsh=MTdqbWhiMXAwbWM4OQ==',
+        icon: 'instagram_black.png',
     }
 ];
 
@@ -65,7 +70,7 @@ const SocialLinkItem: FC<SocialLinkItemProps> = ({ item }) => (
 // Default SocialLinks Component
 const SocialLinks: FC = () => {
     return (
-        <Box sx={{ ml: -1, textAlign: { xs: 'center', md: 'left' } }}>
+        <Box sx={{ ml: -1, textAlign: { xs: 'center', md: 'left'} , paddingRight: '50px' }}>
             <Box
                 component="ul"
                 sx={{

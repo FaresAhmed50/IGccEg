@@ -6,7 +6,6 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import {FooterSocialLinks} from "@/components/footer";
 import SocialLinks from "@/components/home/SocilaLiks";
 
 const HomeFeature: FC = () => {
@@ -98,7 +97,11 @@ const HomeFeature: FC = () => {
               >
               </Typography>
 
-              <Box>
+              <Box
+                  sx = {{
+                      paddingRight : '40px'
+                  }}
+              >
                   <SocialLinks />
               </Box>
           </Grid>
