@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography'; // Import Typography for the paragraph
 import { SocialLink } from '@/interfaces/social-link';
 
 export const socialLinks: SocialLink[] = [
@@ -79,10 +80,25 @@ const SocialLinks: FC = () => {
                 sx={{
                     width: 100,
                     mt: 2, // Add margin-top for spacing
+                    textAlign: 'center', // Center align the content
                 }}
             >
-                <a href={"https://www.illustrav.com/"} target="_blank">
-                    <img src="https://res.cloudinary.com/dduxyvs3x/image/upload/v1735824579/illustraV_logo.svg" alt="Logo" />
+                {/* Add the "Powered by illustraV" paragraph */}
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: 'text.secondary',
+                        mb: 1, // Add margin-bottom for spacing
+                    }}
+                >
+                    Powered by illustraV
+                </Typography>
+                {/* Logo with link */}
+                <a href="https://www.illustrav.com/" target="_blank" rel="noopener noreferrer">
+                    <img
+                        src="https://res.cloudinary.com/dduxyvs3x/image/upload/v1735824579/illustraV_logo.svg"
+                        alt="Logo"
+                    />
                 </a>
             </Box>
         </Box>

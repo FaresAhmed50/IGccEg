@@ -4,14 +4,13 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { FooterNavigation, FooterSocialLinks } from '@/components/footer';
-import {useTranslation} from "next-i18next";
-import {useRouter} from "next/router";
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 const Footer: FC = () => {
-
-    const { t } = useTranslation('common')
-    const { locale } = useRouter()
-    const isRtl = locale === 'ar'
+    const { t } = useTranslation('common');
+    const { locale } = useRouter();
+    const isRtl = locale === 'ar';
 
     return (
         <Box
@@ -34,7 +33,7 @@ const Footer: FC = () => {
                                 minWidth: 360, // Limit width for better readability
                                 mb: { xs: 4, md: 0 }, // Add margin bottom on mobile
                                 textAlign: { xs: 'center', md: 'left' }, // Center on mobile, left-align on desktop
-                                ml:{xs:1}
+                                ml: { xs: 1 },
                             }}
                         >
                             {/* Title */}
@@ -76,13 +75,32 @@ const Footer: FC = () => {
                                 justifyContent: { xs: 'center', md: 'flex-end' }, // Center on mobile, align right on desktop
                             }}
                         >
-                            {/*<FooterNavigation />*/}
-
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d213.2080705972283!2d29.96317888394875!3d31.239310869550305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52863cf22fb%3A0x5a90b8653b3b6e6a!2s587%20Barbar%2C%20San%20Stefano%2C%20El%20Raml%201%2C%20Alexandria%20Governorate%205451010!5e0!3m2!1sen!2seg!4v1740500000603!5m2!1sen!2seg" width="500" height="250"   loading="lazy"></iframe>
-
+                            {/* Embedded Google Map */}
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d213.2080705972283!2d29.96317888394875!3d31.239310869550305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52863cf22fb%3A0x5a90b8653b3b6e6a!2s587%20Barbar%2C%20San%20Stefano%2C%20El%20Raml%201%2C%20Alexandria%20Governorate%205451010!5e0!3m2!1sen!2seg!4v1740500000603!5m2!1sen!2seg"
+                                width="500"
+                                height="250"
+                                loading="lazy"
+                            ></iframe>
                         </Box>
                     </Grid>
                 </Grid>
+
+                {/* Copyright Section */}
+                <Box
+                    sx={{
+                        mt: 4, // Add margin-top for spacing
+                        pt: 3, // Add padding-top for spacing
+                        borderTop: '1px solid', // Add a border at the top
+                        borderColor: 'secondary.main', // Border color
+                        textAlign: 'center', // Center-align the text
+                        opacity: 0.8, // Slightly lighter text
+                    }}
+                >
+                    <Typography variant="body2">
+                        © {new Date().getFullYear()} IGCC Egypt. {t('Footer.copyright')}
+                    </Typography>
+                </Box>
             </Container>
         </Box>
     );
