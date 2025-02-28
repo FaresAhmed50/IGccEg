@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ['raw.githubusercontent.com', 'github.com'], // ✅ إضافة المضيف هنا
+    domains: ['raw.githubusercontent.com', 'github.com' , 'res.cloudinary.com'], // ✅ إضافة المضيف هنا
     remotePatterns: [
       {
         protocol: 'https',
@@ -22,6 +22,7 @@ const nextConfig = {
       },
     ]
   }
+
 }
 
 module.exports = nextConfig
