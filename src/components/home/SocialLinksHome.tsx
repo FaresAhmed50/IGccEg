@@ -1,20 +1,31 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography'; // Import Typography for the paragraph
 import { SocialLink } from '@/interfaces/social-link';
 
 export const socialLinks: SocialLink[] = [
     {
         name: 'Instagram',
         link: 'https://www.linkedin.com/company/igcc-international-center-for-governance-and-consultancy/',
-        icon: '/images/icons/linkedin.png',
+        icon: 'instagram_black.png',
     },
     {
         name: 'Facebook', // Corrected the name from 'YouTube' to 'Facebook'
         link: 'https://www.facebook.com/profile.php?id=100046246285800',
-        icon: '/images/icons/facebook.svg',
+        icon: 'facebook_black.png',
     },
+    {
+        name: 'Linkedin',
+        link: 'https://www.linkedin.com/company/igcc-international-center-for-governance-and-consultancy/',
+        icon: 'linkedin_black.png',
+
+    },
+    {
+        name: 'x',
+        link: 'https://www.linkedin.com/company/igcc-international-center-for-governance-and-consultancy/',
+        icon: 'twitter_black.png',
+
+    }
 ];
 
 interface SocialLinkItemProps {
@@ -59,9 +70,9 @@ const SocialLinkItem: FC<SocialLinkItemProps> = ({ item }) => (
 );
 
 // Default SocialLinks Component
-const SocialLinks: FC = () => {
+const SocialLinksHome: FC = () => {
     return (
-        <Box sx={{ ml: -1, textAlign: { xs: 'center', md: 'left' } }}>
+        <Box sx={{ ml: -1, textAlign: { xs: 'center', md: 'left' } , paddingLeft: '30px' , paddingTop: '20px' }}>
             <Box
                 component="ul"
                 sx={{
@@ -80,29 +91,11 @@ const SocialLinks: FC = () => {
                 sx={{
                     width: 100,
                     mt: 2, // Add margin-top for spacing
-                    textAlign: 'center', // Center align the content
                 }}
             >
-                {/* Add the "Powered by illustraV" paragraph */}
-                <Typography
-                    variant="body2"
-                    sx={{
-                        color: 'white',
-                        mb: 1, // Add margin-bottom for spacing
-                    }}
-                >
-                    Powered by illustraV
-                </Typography>
-                {/* Logo with link */}
-                <a href="https://www.illustrav.com/" target="_blank" rel="noopener noreferrer">
-                    <img
-                        src="https://res.cloudinary.com/dduxyvs3x/image/upload/v1735824579/illustraV_logo.svg"
-                        alt="Logo"
-                    />
-                </a>
             </Box>
         </Box>
     );
 };
 
-export default SocialLinks;
+export default SocialLinksHome;

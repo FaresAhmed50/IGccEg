@@ -197,6 +197,7 @@ const HomeNewsLetter: FC = () => {
                                 fontSize: '1rem',
                                 direction: isRtl ? 'rtl' : 'ltr',
                                 textAlign: isRtl ? 'right' : 'left',
+                                resize: 'vertical', // Restrict resizing to vertical only
                             }}
                         />
 

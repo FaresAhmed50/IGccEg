@@ -29,7 +29,7 @@ const exps: Array<Exp> = [
     },
     {
         label: 'Experience Mentors',
-        value: 10, // Final value for Experience Mentors
+        value: 50, // Final value for Experience Mentors
     },
 ];
 
@@ -171,7 +171,7 @@ const HomeHero: FC = () => {
                                 allow="autoplay; picture-in-picture; clipboard-write; encrypted-media"
                                 width="450"
                                 height="450"
-                                style={{ border: 'none', margin: '10px', borderRadius: '10px' }}
+                                style={{ border: 'none', margin: '10px', borderRadius: '10px' , boxShadow: '2px 9px 15px rgba(0, 0, 0, 0.7)' }}
                                 title="IGCC EG - الحوكمة"
                             ></iframe>
                         </Box>

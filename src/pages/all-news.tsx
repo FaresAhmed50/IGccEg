@@ -42,18 +42,13 @@ const AllNews: FC = () => {
     const [loading, setLoading] = useState(false); // State for loader
 
     useEffect(() => {
-        if (locale !== 'ar') {
-            router.push('/');
-            return;
-        }
-
         const loadNews = async () => {
-            await loadNewsData();
+            await loadNewsData(locale || 'en'); // Fetch data based on the current locale
             setNews(dataNews);
         };
 
         loadNews();
-    }, [locale, router]);
+    }, [locale]);
 
     const handleReadMoreClick = (slug: string) => {
         setLoading(true); // Show loader
@@ -65,13 +60,9 @@ const AllNews: FC = () => {
         }, 2000); // 2 seconds delay
     };
 
-    if (locale !== 'ar') {
-        return null;
-    }
-
     return (
         <MainLayout>
-            <Box sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)' }}>
+            <Box sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)', paddingTop: '40px' }}>
                 <Box sx={{ py: { xs: 6, md: 10 } }}>
                     <Container maxWidth="lg">
                         <Typography
@@ -111,7 +102,7 @@ const AllNews: FC = () => {
                         <Grid container spacing={4}>
                             {news.map((item) => (
                                 <Grid item xs={12} sm={6} md={4} lg={4} key={item.id}>
-                                    <Link href={`/news/${item.slug}`} passHref>
+                                    <Link href={`/news/${item.slug}`} passHref locale={false}>
                                         <MuiLink
                                             component="a"
                                             underline="none"

@@ -6,6 +6,7 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import SocialLinksHome from "@/components/home/SocialLinksHome";
 
 const HomeFeature: FC = () => {
   const { t } = useTranslation('common')
@@ -84,6 +85,17 @@ const HomeFeature: FC = () => {
             >
               {t('home.vision2030')}
             </Typography>
+
+              <Box sx={
+                  {
+                      paddingleft: "500px"
+                  }
+              }>
+                  <SocialLinksHome />
+              </Box>
+
+
+
           </Grid>
         </Grid>
       </Container>

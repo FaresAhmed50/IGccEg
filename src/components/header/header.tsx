@@ -7,30 +7,47 @@ import { Logo } from '@/components/logo';
 import { Navigation } from '@/components/navigation';
 import { useTheme } from '@mui/material/styles';
 import { Menu, Close } from '@mui/icons-material';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-
-const LanguageSwitcher = dynamic(() => import('@/components/language-switcher/LanguageSwitcher'), {
-    ssr: false,
-});
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Popover from '@mui/material/Popover';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const Header: FC = () => {
     const [visibleMenu, setVisibleMenu] = useState<boolean>(false);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // For language dropdown
     const { breakpoints } = useTheme();
     const matchMobileView = useMediaQuery(breakpoints.down('md'));
-    const { locale } = useRouter();
+    const { locale, locales, push } = useRouter();
     const isRtl = locale === 'ar';
+
+    // Handle language dropdown open
+    const handleLanguageMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    // Handle language dropdown close
+    const handleLanguageMenuClose = () => {
+        setAnchorEl(null);
+    };
+
+    // Handle language change
+    const handleLanguageChange = (newLocale: string) => {
+        push('/', undefined, { locale: newLocale }); // Change the locale
+        handleLanguageMenuClose(); // Close the dropdown
+    };
 
     return (
         <Box
             sx={{
                 backgroundColor: 'background.paper',
-                position: 'fixed', // Make the navbar static
-                top: 0, // Position at the top
-                left: 0, // Align to the left
-                width: '100%', // Full width
-                zIndex: 1100, // Ensure it stays above other content
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Optional: Add a shadow
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                zIndex: 1100,
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
             }}
         >
             <Container sx={{ py: { xs: 2, md: 3 } }}>
@@ -48,23 +65,55 @@ const Header: FC = () => {
                             order: isRtl ? 1 : 2,
                             flexDirection: isRtl ? 'row-reverse' : 'row',
                             alignItems: 'center',
-                            gap: 1, // Add gap between elements
+                            gap: 1,
                         }}
                     >
-                        {/* Language Switcher */}
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                borderRadius: '50%',
-                                p: 1, // Add padding
-                                '&:hover': {
-                                    backgroundColor: '#283A5F', // Add hover effect
-                                },
-                            }}
-                        >
-                            <LanguageSwitcher />
+                        {/* Language Dropdown */}
+                        <Box>
+                            <Button
+                                onClick={handleLanguageMenuOpen}
+                                sx={{
+                                    textTransform: 'uppercase',
+                                    color: 'text.primary',
+                                    fontFamily: 'inherit', // Use the same font as the navbar
+                                    fontSize: '1rem', // Match the font size
+                                    '&:hover': {
+                                        backgroundColor: 'action.hover',
+                                    },
+                                }}
+                            >
+                                {locale?.toUpperCase()}
+                            </Button>
+                            <Popover
+                                open={Boolean(anchorEl)}
+                                anchorEl={anchorEl}
+                                onClose={handleLanguageMenuClose}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'center',
+                                }}
+                            >
+                                <MenuList>
+                                    {locales?.map((lang) => (
+                                        <MenuItem key={lang} onClick={() => handleLanguageChange(lang)}>
+                                            <Typography
+                                                variant="body1"
+                                                sx={{
+                                                    textTransform: 'uppercase',
+                                                    fontFamily: 'inherit', // Use the same font as the navbar
+                                                    fontSize: '1rem', // Match the font size
+                                                }}
+                                            >
+                                                {lang}
+                                            </Typography>
+                                        </MenuItem>
+                                    ))}
+                                </MenuList>
+                            </Popover>
                         </Box>
 
                         {/* Menu Icon */}
@@ -74,7 +123,7 @@ const Header: FC = () => {
                                 ml: isRtl ? 0 : 1,
                                 mr: isRtl ? 1 : 0,
                                 '&:hover': {
-                                    backgroundColor: 'action.hover', // Add hover effect
+                                    backgroundColor: 'action.hover',
                                 },
                             }}
                         >
@@ -102,9 +151,6 @@ const Header: FC = () => {
                             }),
                         }}
                     >
-                        {/* Magic Space */}
-                        <Box />
-
                         {/* Navigation */}
                         <Navigation />
 
@@ -117,19 +163,56 @@ const Header: FC = () => {
                                 order: isRtl ? 1 : 2,
                             }}
                         >
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    borderRadius: '50%',
-                                    p: 1, // Add padding
-                                    '&:hover': {
-                                        backgroundColor: 'action.hover', // Add hover effect
-                                    },
-                                }}
-                            >
-                                <LanguageSwitcher />
+                            <Box>
+                                <Button
+                                    onClick={handleLanguageMenuOpen}
+                                    sx={{
+                                        textTransform: 'uppercase',
+                                        color: 'blue', // need to changeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                                        fontFamily: 'inherit', // Use the same font as the navbar
+                                        fontSize: '1rem', // Match the font size
+                                        '&:hover': {
+                                            backgroundColor: 'action.hover',
+                                        },
+                                    }}
+                                >
+                                    {locale?.toUpperCase()}
+                                </Button>
+                                <Popover
+                                    open={Boolean(anchorEl)}
+                                    anchorEl={anchorEl}
+                                    onClose={handleLanguageMenuClose}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'center',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'center',
+                                    }}
+                                    sx={{
+                                        '& .MuiPaper-root': {
+                                            boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                                        },
+                                    }}
+                                >
+                                    <MenuList>
+                                        {locales?.map((lang) => (
+                                            <MenuItem key={lang} onClick={() => handleLanguageChange(lang)}>
+                                                <Typography
+                                                    variant="body1"
+                                                    sx={{
+                                                        textTransform: 'uppercase',
+                                                        fontFamily: 'inherit', // Use the same font as the navbar
+                                                        fontSize: '1rem', // Match the font size
+                                                    }}
+                                                >
+                                                    {lang}
+                                                </Typography>
+                                            </MenuItem>
+                                        ))}
+                                    </MenuList>
+                                </Popover>
                             </Box>
                         </Box>
 
@@ -141,7 +224,7 @@ const Header: FC = () => {
                                     top: 10,
                                     [isRtl ? 'left' : 'right']: 10,
                                     '&:hover': {
-                                        backgroundColor: 'action.hover', // Add hover effect
+                                        backgroundColor: 'action.hover',
                                     },
                                 }}
                                 onClick={() => setVisibleMenu(!visibleMenu)}
