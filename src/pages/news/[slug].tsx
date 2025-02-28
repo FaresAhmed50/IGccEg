@@ -36,21 +36,18 @@ const NewsDetail: FC = () => {
     const [newsItem, setNewsItem] = useState<News | null>(null);
 
     useEffect(() => {
-        if (locale !== 'ar') {
-            router.push('/');
-            return;
-        }
-
         const loadNews = async () => {
-            const data = await loadNewsData();
+            const data = await loadNewsData(locale || 'en'); // Fetch data based on the current locale
             const item = data.find((item) => item.slug === slug);
             setNewsItem(item || null);
         };
 
-        loadNews();
-    }, [locale, router, slug]);
+        if (slug) {
+            loadNews();
+        }
+    }, [locale, slug]);
 
-    if (locale !== 'ar' || !newsItem) {
+    if (!newsItem) {
         return (
             <MainLayout>
                 <Container>
@@ -64,7 +61,7 @@ const NewsDetail: FC = () => {
 
     return (
         <MainLayout>
-            <Box component="article" sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)' , paddingTop: '40px' }}>
+            <Box component="article" sx={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 64px)', paddingTop: '40px' }}>
                 <Box sx={{ py: { xs: 6, md: 10 } }}>
                     <Container maxWidth="lg">
                         <StyledPaper>
@@ -157,14 +154,22 @@ const NewsDetail: FC = () => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    // Fetch data to generate paths
-    const response = await fetch(`https://raw.githubusercontent.com/RamezHany/IGCCe-tr/refs/heads/main/news.json`);
-    const data = await response.json();
+    // Fetch data to generate paths for both Arabic and English
+    const responseAr = await fetch('https://raw.githubusercontent.com/RamezHany/IGCCe-tr/refs/heads/main/news_ar.json');
+    const responseEn = await fetch('https://raw.githubusercontent.com/RamezHany/IGCCe-tr/refs/heads/main/news_en.json');
+    const dataAr = await responseAr.json();
+    const dataEn = await responseEn.json();
 
-    const paths = data.news.map((news: News) => ({
-        params: { slug: news.slug },
-        locale: 'ar',
-    }));
+    const paths = [
+        ...dataAr.news.map((news: News) => ({
+            params: { slug: news.slug },
+            locale: 'ar',
+        })),
+        ...dataEn.news.map((news: News) => ({
+            params: { slug: news.slug },
+            locale: 'en',
+        })),
+    ];
 
     return {
         paths,

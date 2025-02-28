@@ -96,8 +96,11 @@ const HomeFeature: FC = () => {
                       mt: 2
                   }}
               >
-                  <SocialLinks />
               </Typography>
+
+              <Box>
+                  <SocialLinks />
+              </Box>
           </Grid>
         </Grid>
       </Container>

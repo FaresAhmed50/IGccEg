@@ -1,11 +1,16 @@
-import type { News } from '@/interfaces/News'
+import type { News } from '@/interfaces/News';
 
 let dataNews: Array<News> = [];
 
 // This function will be called to load the data
-export async function loadNewsData(): Promise<News[]> {
+export async function loadNewsData(locale: string): Promise<News[]> {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/RamezHany/IGCCe-tr/refs/heads/main/news.json');
+        const url =
+            locale === 'ar'
+                ? 'https://raw.githubusercontent.com/RamezHany/IGCCe-tr/refs/heads/main/news_ar.json'
+                : 'https://raw.githubusercontent.com/RamezHany/IGCCe-tr/refs/heads/main/news_en.json';
+
+        const response = await fetch(url);
         const data = await response.json();
         dataNews = data.news;
         return dataNews;
@@ -15,9 +20,9 @@ export async function loadNewsData(): Promise<News[]> {
     }
 }
 
-// Initial load of data
+// Initial load of data (optional, can be removed if not needed)
 if (typeof window !== 'undefined') {
-    loadNewsData();
+    loadNewsData('en'); // Default to English
 }
 
 export { dataNews };
