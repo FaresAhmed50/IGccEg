@@ -24,7 +24,8 @@
     "viewAllPosts": "View All Posts",
     "backToHome": "Back to Home",
     "search": "Search",
-    "clear": "Clear"
+    "clear": "Clear",
+    "viewAllNews" : "view All News"
   },
   "footer": {
     "address": "Address",
@@ -155,7 +156,7 @@
   "news" :{
     "title" : "Latest News",
     "allNews" : "Latest News"
-},
+  },
   "contactUs": "Contact Us",
   "getInTouch": "Get in touch with us for inquiries or support",
   "course": "Course",
