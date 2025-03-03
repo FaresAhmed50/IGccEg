@@ -7,9 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
 
 // Import the LoadingSpinner component
-const LoadingSpinner = dynamic(() => import('../components/LoadingSpinner/LoadingSpinner'), {
-    ssr: false
-});
+
 
 // Dynamic imports for all components
 const DynamicHomeHero = dynamic(() => import('../components/home/hero'));
@@ -27,18 +25,20 @@ const DynamicLinkedinPosts = dynamic(() => import('../components/home/linkedin-p
 
 const Home: NextPageWithLayout = () => {
     return (
-        <LoadingSpinner>
-            <DynamicHomeHero />
-            <DynamicHomePopularCourse />
-            <DynamicHomeFeature />
-            <DynamicHomeTestimonial />
-            <DynamicHomeOurMentors />
-            <DynamicHomeNews />
-            <DynamicLinkedinPosts />
-            <DynamicPartnersCarousel />
-            <DynamicHomeNewsLetter />
-            <DynamicWhatsappIcon/>
-        </LoadingSpinner>
+            <>
+                <DynamicHomeHero />
+                <DynamicHomePopularCourse />
+                <DynamicHomeFeature />
+                <DynamicHomeTestimonial />
+                <DynamicHomeOurMentors />
+                <DynamicHomeNews />
+                <DynamicLinkedinPosts />
+                <DynamicPartnersCarousel />
+                <DynamicHomeNewsLetter />
+                <DynamicWhatsappIcon/>
+            </>
+
+
     );
 };
 
