@@ -144,7 +144,7 @@ const AllNews: FC = () => {
                                     variant="outlined" 
                                     color="primary" 
                                     onClick={clearSearch}
-                                    sx={{ minWidth: 100 }}
+                                    // sx={{ minWidth: 100 }}
                                 >
                                     {locale === 'ar' ? 'مسح' : 'Clear'}
                                 </Button>

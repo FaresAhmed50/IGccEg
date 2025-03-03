@@ -180,7 +180,7 @@ const AllLinkedinPosts: NextPageWithLayout = () => {
                             variant="outlined" 
                             color="primary" 
                             onClick={clearSearch}
-                            sx={{ minWidth: 100 }}
+                            // sx={{ minWidth: 100 }}
                         >
                             {t('buttons.clear', 'Clear')}
                         </Button>

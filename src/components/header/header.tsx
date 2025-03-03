@@ -102,6 +102,11 @@ const Header: FC = () => {
                                     vertical: 'top',
                                     horizontal: 'center',
                                 }}
+                                sx={{
+                                    '& .MuiPaper-root': { // Target the Paper component inside Popover
+                                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', // Reduced box shadow
+                                    },
+                                }}
                             >
                                 <MenuList>
                                     {locales?.map((lang) => (
@@ -136,7 +141,7 @@ const Header: FC = () => {
                             width: '100%',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
+                            justifyContent: locale === 'ar' ? 'flex-end' : 'flex-start', // Dynamic justifyContent
                             flexDirection: { xs: 'column', md: 'row' },
                             transition: (theme) => theme.transitions.create(['top']),
                             ...(matchMobileView && {
@@ -162,7 +167,8 @@ const Header: FC = () => {
                                 display: { xs: 'none', md: 'flex' },
                                 alignItems: 'center',
                                 gap: 2,
-                                order: isRtl ? 1 : 2,
+                                order: isRtl ? 2 : 2,
+                                direction: 'ltr', // Force LTR layout for the language dropdown
                             }}
                         >
                             <Box>

@@ -11,6 +11,7 @@ const LoadingSpinner = dynamic(() => import('../components/LoadingSpinner/Loadin
     ssr: false
 });
 
+// Dynamic imports for all components
 const DynamicHomeHero = dynamic(() => import('../components/home/hero'));
 const DynamicHomeFeature = dynamic(() => import('../components/home/feature'));
 const DynamicHomePopularCourse = dynamic(() => import('../components/home/popular-courses'));

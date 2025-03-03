@@ -118,6 +118,10 @@
     "footerpragraphs": "IGCC Egypt هو وجهتك الأولى للحصول على استشارات متخصصة في مجال الحوكمة والتنمية المستدامة مع وشهادات معتمدة من ICASالمعتمدة دوليًا",
     "copyright": "All rights reserved."
   },
+  "news" :{
+    "title" : "اخر الاخار",
+    "allNews" : "اخر الاخار"
+  },
   "linkedinPosts": {
     "title": "منشورات لينكد إن",
     "subtitle": "تابعنا على لينكد إن للاطلاع على أحدث الأخبار والرؤى",
@@ -129,6 +133,29 @@
     "searchPlaceholder": "البحث في المنشورات...",
     "noResults": "لم يتم العثور على منشورات تطابق معايير البحث",
     "allCategories": "جميع الفئات"
+  },
+  "ClientOpponentTitle": {
+    "WhatOurClientSay" : "ماذا يقول عنا عملائنا"
+  },
+  "ClientOpponentName": {
+    "FirstName" : "ااااااااا ",
+    "SecondName": "Leon S Kennedy",
+    "ThirdName": "Nguyễn Thuy"
+  },
+  "ClientOpponentJop": {
+    "FirstJop": "Machine Learning",
+    "SecondJop": "Android Development",
+    "ThirdJop": "UI/UX Design"
+  },
+  "ClientOpponentDescription": {
+    "FirstDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "SecondDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "ThirdDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "ClientOpponentCompany": {
+    "FirstCompany": "Google",
+    "SecondCompany": "Google",
+    "ThirdCompany": "Google"
   },
   "contactUs": "تواصل معنا",
   "getInTouch": "تواصل معنا للاستفسارات أو الدعم",

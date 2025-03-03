@@ -1,40 +1,56 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/router';
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
 interface LoadingSpinnerProps {
     children: ReactNode;
+    minimumLoadingTime?: number; // Minimum time to show spinner in ms
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ children }) => {
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+                                                           children,
+                                                           minimumLoadingTime = 2000 // Keep your original 5 second timer
+                                                       }) => {
     const [loading, setLoading] = useState(true);
-    const router = useRouter();
 
     useEffect(() => {
         // Check if user has already seen the spinner in this session
-        const hasSeenSpinner = sessionStorage.getItem('hasSeenSpinner');
+        let hasSeenSpinner = false;
+
+        try {
+            hasSeenSpinner = sessionStorage.getItem('hasSeenSpinner') === 'true';
+        } catch (error) {
+            console.error('Error accessing sessionStorage:', error);
+        }
 
         if (!hasSeenSpinner) {
-            // First time in this session - show spinner for 5 seconds
+            // First time in this session - show spinner for specified time
+            console.log('Showing spinner for first time visitor');
             const timer = setTimeout(() => {
+                console.log('Timer completed, hiding spinner');
                 setLoading(false);
-                // Store that user has seen the spinner in this session
-                sessionStorage.setItem('hasSeenSpinner', 'true');
+
+                try {
+                    // Store that user has seen the spinner in this session
+                    sessionStorage.setItem('hasSeenSpinner', 'true');
+                } catch (error) {
+                    console.error('Error setting sessionStorage:', error);
+                }
 
                 // After spinner disappears, check if we need to scroll to a section
                 handleSectionScroll();
-            }, 5000);
+            }, minimumLoadingTime);
 
             return () => clearTimeout(timer);
         } else {
             // User has already seen spinner in this session - don't show it
+            console.log('Returning visitor, skipping spinner');
             setLoading(false);
 
             // Immediately check if we need to scroll to a section
             setTimeout(handleSectionScroll, 100);
         }
-    }, []);
+    }, [minimumLoadingTime]);
 
     const handleSectionScroll = () => {
         // Check if there's a hash in the URL

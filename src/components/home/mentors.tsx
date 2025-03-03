@@ -8,6 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme, styled } from '@mui/material/styles';
 import IconArrowBack from '@mui/icons-material/ArrowBack';
 import IconArrowForward from '@mui/icons-material/ArrowForward';
+import { useTranslation } from 'next-i18next'; // Import useTranslation
 
 import { MentorCardItem } from '@/components/mentor';
 import useMentorData from './mentors.data'; // Import the custom hook
@@ -61,6 +62,7 @@ const StyledDots = styled('ul')(({ theme }) => ({
 const HomeOurMentors: FC = () => {
     const { breakpoints } = useTheme();
     const matchMobileView = useMediaQuery(breakpoints.down('md'));
+    const { t } = useTranslation('common'); // Use the useTranslation hook
 
     // Fetch mentor data using the custom hook
     const { data } = useMentorData();
@@ -99,9 +101,10 @@ const HomeOurMentors: FC = () => {
                     variant="h1"
                     sx={{
                         fontSize: '3rem !important', // Use !important to override default styles
+                        textAlign : 'center'
                     }}
                 >
-                    What Our Client Say About Us
+                    {t('ClientOpponentTitle.WhatOurClientSay')} {/* Use the t function */}
                 </Typography>
 
                 {/* Slider for mentor cards */}

@@ -4,8 +4,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Image from 'next/image';
-import {useTranslation} from "next-i18next";
-import {useRouter} from "next/router";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 // Using program images for partners from external JSON
 
@@ -38,18 +38,37 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
     }
 }));
 
-const CarouselTrack = styled(Box)(({ theme }) => ({
+// Create two different styled components for LTR and RTL
+const CarouselTrackLTR = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    gap: theme.spacing(4), 
-    animation: 'scroll 60s linear infinite', 
-    width: 'fit-content', 
+    gap: theme.spacing(4),
+    animation: 'scrollLTR 60s linear infinite',
+    width: 'fit-content',
     '&:hover': {
         animationPlayState: 'paused',
     },
-    '@keyframes scroll': {
+    '@keyframes scrollLTR': {
         '0%': { transform: 'translateX(0)' },
-        '100%': { transform: 'translateX(calc(-50%))' } 
+        '100%': { transform: 'translateX(calc(-50%))' }
+    },
+    [theme.breakpoints.up('sm')]: {
+        gap: theme.spacing(5),
+    }
+}));
+
+const CarouselTrackRTL = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(4),
+    animation: 'scrollRTL 60s linear infinite',
+    width: 'fit-content',
+    '&:hover': {
+        animationPlayState: 'paused',
+    },
+    '@keyframes scrollRTL': {
+        '0%': { transform: 'translateX(0)' },
+        '100%': { transform: 'translateX(calc(50%))' }
     },
     [theme.breakpoints.up('sm')]: {
         gap: theme.spacing(5),
@@ -58,8 +77,8 @@ const CarouselTrack = styled(Box)(({ theme }) => ({
 
 const PartnerLogo = styled(Box)(({ theme }) => ({
     flex: '0 0 auto',
-    width: 80, 
-    height: 80, 
+    width: 80,
+    height: 80,
     position: 'relative',
     borderRadius: '50%',
     overflow: 'hidden',
@@ -71,12 +90,12 @@ const PartnerLogo = styled(Box)(({ theme }) => ({
         boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
     },
     [theme.breakpoints.up('sm')]: {
-        width: 100, 
-        height: 100, 
+        width: 100,
+        height: 100,
     },
     [theme.breakpoints.up('md')]: {
-        width: 120, 
-        height: 120, 
+        width: 120,
+        height: 120,
     }
 }));
 
@@ -120,51 +139,82 @@ const PartnersCarousel: React.FC = () => {
                         fontSize: { xs: 24, sm: 28, md: 36 },
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em',
-
                     }}
                 >
                     {t('home.OurPartners')}
                 </Typography>
 
                 <CarouselContainer>
-                    <Box sx={{ 
+                    <Box sx={{
                         overflow: 'hidden',
                         position: 'relative',
                         width: '100%'
                     }}>
-                        <CarouselTrack sx={{ 
-                            direction: isRtl ? 'rtl' : 'ltr' 
-                        }}>
-                            {duplicatedPartners.map((partner, index) => (
-                                <PartnerLogo key={`${partner.id}-${index}`}>
-                                    <Box
-                                        component="div"
-                                        sx={{
-                                            position: 'relative',
-                                            width: '100%',
-                                            height: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        <Image
-                                            src={partner.logo}
-                                            alt={partner.name}
-                                            width={120}
-                                            height={120}
-                                            style={{
-                                                objectFit: 'contain', 
-                                                borderRadius: '50%',
-                                                width: '90%', 
-                                                height: '90%'
+                        {isRtl ? (
+                            <CarouselTrackRTL>
+                                {duplicatedPartners.map((partner, index) => (
+                                    <PartnerLogo key={`${partner.id}-${index}`}>
+                                        <Box
+                                            component="div"
+                                            sx={{
+                                                position: 'relative',
+                                                width: '100%',
+                                                height: '100%',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
                                             }}
-                                            priority={index < 8} 
-                                        />
-                                    </Box>
-                                </PartnerLogo>
-                            ))}
-                        </CarouselTrack>
+                                        >
+                                            <Image
+                                                src={partner.logo}
+                                                alt={partner.name}
+                                                width={120}
+                                                height={120}
+                                                style={{
+                                                    objectFit: 'contain',
+                                                    borderRadius: '50%',
+                                                    width: '90%',
+                                                    height: '90%'
+                                                }}
+                                                priority={index < 8}
+                                            />
+                                        </Box>
+                                    </PartnerLogo>
+                                ))}
+                            </CarouselTrackRTL>
+                        ) : (
+                            <CarouselTrackLTR>
+                                {duplicatedPartners.map((partner, index) => (
+                                    <PartnerLogo key={`${partner.id}-${index}`}>
+                                        <Box
+                                            component="div"
+                                            sx={{
+                                                position: 'relative',
+                                                width: '100%',
+                                                height: '100%',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <Image
+                                                src={partner.logo}
+                                                alt={partner.name}
+                                                width={120}
+                                                height={120}
+                                                style={{
+                                                    objectFit: 'contain',
+                                                    borderRadius: '50%',
+                                                    width: '90%',
+                                                    height: '90%'
+                                                }}
+                                                priority={index < 8}
+                                            />
+                                        </Box>
+                                    </PartnerLogo>
+                                ))}
+                            </CarouselTrackLTR>
+                        )}
                     </Box>
                 </CarouselContainer>
             </Container>

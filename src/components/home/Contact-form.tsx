@@ -211,7 +211,7 @@ const HomeNewsLetter: FC = () => {
                                 size="large"
                                 disabled={isLoading}
                                 sx={{
-                                    minWidth: '200px',
+                                    // minWidth: '200px',
                                     position: 'relative',
                                     height: 54,
                                     fontSize: '16px',
