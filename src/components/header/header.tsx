@@ -141,7 +141,7 @@ const Header: FC = () => {
                             width: '100%',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: locale === 'ar' ? 'flex-end' : 'flex-start', // Dynamic justifyContent
+                            justifyContent: locale === 'ar' ? 'flex-end' : 'flex-start',// Center the content
                             flexDirection: { xs: 'column', md: 'row' },
                             transition: (theme) => theme.transitions.create(['top']),
                             ...(matchMobileView && {
@@ -152,6 +152,7 @@ const Header: FC = () => {
                                 height: { xs: '100vh', md: 'auto' },
                                 top: visibleMenu ? 0 : '-120vh',
                                 left: 0,
+                                justifyContent: 'center',
                             }),
                         }}
                     >
