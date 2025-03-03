@@ -215,6 +215,10 @@ const HomeNewsLetter: FC = () => {
                                     position: 'relative',
                                     height: 54,
                                     fontSize: '16px',
+                                    backgroundColor: '#56bb76', // Default background color
+                                    '&:hover': {
+                                        backgroundColor: '#56bb76', // Same as default to remove hover effect
+                                    },
                                 }}
                             >
                                 {isLoading ? (

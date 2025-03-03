@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -8,10 +8,24 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import SocialLinks from "@/components/home/SocilaLiks";
 
+interface ConfigData {
+  doctorImage: string;
+  vimeoLink: string;
+}
+
 const HomeFeature: FC = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
   const isRtl = locale === 'ar'
+  const [config, setConfig] = useState<ConfigData>({ doctorImage: '/images/Nourhan_m_Hassan.png', vimeoLink: '' });
+
+  useEffect(() => {
+    // Fetch config data
+    fetch('/config.json')
+      .then(response => response.json())
+      .then(data => setConfig(data))
+      .catch(error => console.error('Error loading config:', error));
+  }, []);
 
   return (
     <Box id="feature" sx={{ xs: 10, md: 14 , backgroundColor: 'background.paper' }}>
@@ -19,7 +33,7 @@ const HomeFeature: FC = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={5}>
             <Box sx={{ position: 'relative' }}>
-              <Image src="/images/Nourhan_m_Hassan.png" width={650} height={678} quality={97} alt="Feature img" />
+              <Image src={config.doctorImage} width={650} height={678} quality={97} alt="Feature img" />
             </Box>
           </Grid>
           <Grid item xs={12} md={7}>

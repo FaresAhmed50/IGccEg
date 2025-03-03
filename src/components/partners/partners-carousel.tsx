@@ -41,24 +41,25 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
 const CarouselTrack = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    gap: theme.spacing(3),
-    animation: 'scroll 30s linear infinite',
+    gap: theme.spacing(4), 
+    animation: 'scroll 60s linear infinite', 
+    width: 'fit-content', 
     '&:hover': {
         animationPlayState: 'paused',
     },
     '@keyframes scroll': {
         '0%': { transform: 'translateX(0)' },
-        '100%': { transform: 'translateX(-50%)' }
+        '100%': { transform: 'translateX(calc(-50%))' } 
     },
     [theme.breakpoints.up('sm')]: {
-        gap: theme.spacing(6),
+        gap: theme.spacing(5),
     }
 }));
 
 const PartnerLogo = styled(Box)(({ theme }) => ({
     flex: '0 0 auto',
-    width: 100,
-    height: 100,
+    width: 80, 
+    height: 80, 
     position: 'relative',
     borderRadius: '50%',
     overflow: 'hidden',
@@ -70,12 +71,12 @@ const PartnerLogo = styled(Box)(({ theme }) => ({
         boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
     },
     [theme.breakpoints.up('sm')]: {
-        width: 120,
-        height: 120,
+        width: 100, 
+        height: 100, 
     },
     [theme.breakpoints.up('md')]: {
-        width: 150,
-        height: 150,
+        width: 120, 
+        height: 120, 
     }
 }));
 
@@ -99,8 +100,7 @@ const PartnersCarousel: React.FC = () => {
             });
     }, []);
 
-    // Triple the partners for smoother infinite scroll
-    const duplicatedPartners = [...partners, ...partners, ...partners];
+    const duplicatedPartners = [...partners, ...partners];
 
     if (loading) {
         return <div>Loading...</div>;
@@ -127,34 +127,45 @@ const PartnersCarousel: React.FC = () => {
                 </Typography>
 
                 <CarouselContainer>
-                    <CarouselTrack>
-                        {duplicatedPartners.map((partner, index) => (
-                            <PartnerLogo key={`${partner.id}-${index}`}>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        position: 'relative',
-                                        width: '100%',
-                                        height: '100%',
-                                    }}
-                                >
-                                    <Image
-                                        src={partner.logo}
-                                        alt={partner.name}
-                                        width={150}
-                                        height={150}
-                                        style={{
-                                            objectFit: 'cover',
-                                            borderRadius: '50%',
+                    <Box sx={{ 
+                        overflow: 'hidden',
+                        position: 'relative',
+                        width: '100%'
+                    }}>
+                        <CarouselTrack sx={{ 
+                            direction: isRtl ? 'rtl' : 'ltr' 
+                        }}>
+                            {duplicatedPartners.map((partner, index) => (
+                                <PartnerLogo key={`${partner.id}-${index}`}>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            position: 'relative',
                                             width: '100%',
-                                            height: '100%'
+                                            height: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
                                         }}
-                                        priority={index < 5}
-                                    />
-                                </Box>
-                            </PartnerLogo>
-                        ))}
-                    </CarouselTrack>
+                                    >
+                                        <Image
+                                            src={partner.logo}
+                                            alt={partner.name}
+                                            width={120}
+                                            height={120}
+                                            style={{
+                                                objectFit: 'contain', 
+                                                borderRadius: '50%',
+                                                width: '90%', 
+                                                height: '90%'
+                                            }}
+                                            priority={index < 8} 
+                                        />
+                                    </Box>
+                                </PartnerLogo>
+                            ))}
+                        </CarouselTrack>
+                    </Box>
                 </CarouselContainer>
             </Container>
         </StyledSection>

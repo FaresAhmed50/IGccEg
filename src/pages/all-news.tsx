@@ -17,6 +17,8 @@ import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { News } from '@/interfaces/News';
 import CircularProgress from '@mui/material/CircularProgress'; // Import CircularProgress for the loader
+import { TextField, InputAdornment, Button } from '@mui/material'; // Import components for search
+import SearchIcon from '@mui/icons-material/Search'; // Import search icon
 
 // Styled Paper for Cards
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -39,16 +41,35 @@ const AllNews: FC = () => {
     const router = useRouter();
     const { locale } = router;
     const [news, setNews] = useState<News[]>([]);
+    const [filteredNews, setFilteredNews] = useState<News[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(false); // State for loader
 
     useEffect(() => {
         const loadNews = async () => {
             await loadNewsData(locale || 'en'); // Fetch data based on the current locale
             setNews(dataNews);
+            setFilteredNews(dataNews);
         };
 
         loadNews();
     }, [locale]);
+
+    // Filter news based on search term
+    useEffect(() => {
+        if (searchTerm === '') {
+            setFilteredNews(news);
+        } else {
+            const filtered = news.filter(item => {
+                return (
+                    item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    (item.shortDescription && item.shortDescription.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                    (item.description && item.description[0] && item.description[0].toLowerCase().includes(searchTerm.toLowerCase()))
+                );
+            });
+            setFilteredNews(filtered);
+        }
+    }, [searchTerm, news]);
 
     const handleReadMoreClick = (slug: string) => {
         setLoading(true); // Show loader
@@ -56,8 +77,18 @@ const AllNews: FC = () => {
         // Simulate API call delay (replace this with your actual API call)
         setTimeout(() => {
             setLoading(false); // Hide loader
-            router.push(`/news/${slug}`); // Navigate to the news detail page
+            router.push(`/news/${slug}`, undefined, { locale: locale }); // Navigate to the news detail page with current locale
         }, 2000); // 2 seconds delay
+    };
+
+    // Handle search input change
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    };
+
+    // Clear search
+    const clearSearch = () => {
+        setSearchTerm('');
     };
 
     return (
@@ -79,6 +110,47 @@ const AllNews: FC = () => {
                             {t('news.allNews', 'جميع الأخبار')}
                         </Typography>
 
+                        {/* Search Section */}
+                        <Box 
+                            sx={{ 
+                                mb: 6, 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                gap: 2,
+                                p: 3,
+                                borderRadius: 2,
+                                backgroundColor: 'background.paper',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                placeholder={locale === 'ar' ? 'البحث في الأخبار...' : 'Search news...'}
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon color="primary" />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                sx={{ flexGrow: 1 }}
+                            />
+                            
+                            {searchTerm && (
+                                <Button 
+                                    variant="outlined" 
+                                    color="primary" 
+                                    onClick={clearSearch}
+                                    sx={{ minWidth: 100 }}
+                                >
+                                    {locale === 'ar' ? 'مسح' : 'Clear'}
+                                </Button>
+                            )}
+                        </Box>
+
                         {/* Loader */}
                         {loading && (
                             <Box
@@ -99,10 +171,19 @@ const AllNews: FC = () => {
                             </Box>
                         )}
 
+                        {/* No results message */}
+                        {filteredNews.length === 0 && (
+                            <Box sx={{ textAlign: 'center', py: 8 }}>
+                                <Typography variant="h5" color="text.secondary">
+                                    {locale === 'ar' ? 'لا توجد نتائج مطابقة لبحثك' : 'No results matching your search'}
+                                </Typography>
+                            </Box>
+                        )}
+
                         <Grid container spacing={4}>
-                            {news.map((item) => (
+                            {filteredNews.map((item) => (
                                 <Grid item xs={12} sm={6} md={4} lg={4} key={item.id}>
-                                    <Link href={`/news/${item.slug}`} passHref locale={false}>
+                                    <Link href={`/news/${item.slug}`} passHref locale={locale}>
                                         <MuiLink
                                             component="a"
                                             underline="none"
@@ -143,7 +224,7 @@ const AllNews: FC = () => {
                                                 <Typography
                                                     variant="h6"
                                                     sx={{
-                                                        mb: 1.5,
+                                                        mb: 1,
                                                         color: 'text.primary',
                                                         fontWeight: 'bold',
                                                         minHeight: 56,

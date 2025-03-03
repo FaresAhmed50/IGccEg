@@ -18,6 +18,11 @@ interface ExpItemProps {
     currentValue: number; // Add currentValue to props
 }
 
+interface ConfigData {
+    vimeoLink: string;
+    doctorImage: string;
+}
+
 const exps: Array<Exp> = [
     {
         label: 'Students',
@@ -55,6 +60,15 @@ const HomeHero: FC = () => {
     const isRtl = locale === 'ar';
 
     const [counters, setCounters] = useState<number[]>(exps.map(() => 0));
+    const [config, setConfig] = useState<ConfigData>({ vimeoLink: '', doctorImage: '' });
+
+    useEffect(() => {
+        // Fetch config data
+        fetch('/config.json')
+            .then(response => response.json())
+            .then(data => setConfig(data))
+            .catch(error => console.error('Error loading config:', error));
+    }, []);
 
     useEffect(() => {
         const duration = 2000; // Animation duration in milliseconds
@@ -169,14 +183,16 @@ const HomeHero: FC = () => {
                             alignItems: 'center',
                             width: '100%', // Ensure the Box takes full width on mobile
                         }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1058579907?h=dcc436d4f4&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&autoplay=1"
-                                allow="autoplay; picture-in-picture; clipboard-write; encrypted-media"
-                                width="450"
-                                height="450"
-                                style={{ border: 'none', margin: '10px', borderRadius: '20px' , boxShadow: '10px 20px 20px rgba(0, 0, 0, 0.2)' }}
-                                title="IGCC EG - الحوكمة"
-                            ></iframe>
+                            {config.vimeoLink && (
+                                <iframe
+                                    src={config.vimeoLink}
+                                    allow="autoplay; picture-in-picture; clipboard-write; encrypted-media"
+                                    width="450"
+                                    height="450"
+                                    style={{ border: 'none', margin: '10px', borderRadius: '20px' , boxShadow: '10px 20px 20px rgba(0, 0, 0, 0.2)' }}
+                                    title="IGCC EG - الحوكمة"
+                                ></iframe>
+                            )}
                         </Box>
                     </Grid>
                 </Grid>

@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import { FooterNavigation, FooterSocialLinks } from '@/components/footer';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import Link from '@mui/material/Link';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const Footer: FC = () => {
     const { t } = useTranslation('common');
@@ -62,8 +65,52 @@ const Footer: FC = () => {
                                 {t('Footer.footerpragraphs')}
                             </Typography>
 
+                            {/* Contact Information */}
+                            <Box
+                                sx={{
+                                    mb: 3,
+                                    textAlign: { xs: 'center', md: 'left' }, // Center text on mobile, left-align on desktop
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: { xs: 'center', md: 'flex-start' }, // Center items on mobile, left-align on desktop
+                                }}
+                            >
+                                <Link
+                                    href="mailto:drnour@igcc-eg.com"
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        mb: 1.5,
+                                        color: 'primary.contrastText',
+                                        textDecoration: 'none',
+                                        '&:hover': {
+                                            textDecoration: 'underline',
+                                        }
+                                    }}
+                                >
+                                    <EmailIcon sx={{ mr: 1 }} />
+                                    <Typography variant="body1">drnour@igcc-eg.com</Typography>
+                                </Link>
+                                <Link
+                                    href="tel:+201102311320"
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        color: 'primary.contrastText',
+                                        textDecoration: 'none',
+                                        '&:hover': {
+                                            textDecoration: 'underline',
+                                        }
+                                    }}
+                                >
+                                    <PhoneIcon sx={{ mr: 1 }} />
+                                    <Typography variant="body1">+201102311320</Typography>
+                                </Link>
+                                <FooterSocialLinks />
+                            </Box>
+
                             {/* Social Links */}
-                            <FooterSocialLinks />
+
                         </Box>
                     </Grid>
 
@@ -98,7 +145,7 @@ const Footer: FC = () => {
                     }}
                 >
                     <Typography variant="body2">
-                        © {new Date().getFullYear()} IGCC Egypt. {t('Footer.copyright')}
+                        &copy; {new Date().getFullYear()} IGCC Egypt. {t('Footer.copyright')}
                     </Typography>
                 </Box>
             </Container>

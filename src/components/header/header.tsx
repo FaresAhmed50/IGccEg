@@ -20,7 +20,7 @@ const Header: FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const { breakpoints } = useTheme();
     const matchMobileView = useMediaQuery(breakpoints.down('md'));
-    const { locale, locales, push } = useRouter();
+    const { locale, locales, push, pathname, asPath, query } = useRouter();
     const isRtl = locale === 'ar';
 
     const handleLanguageMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,8 +32,18 @@ const Header: FC = () => {
     };
 
     const handleLanguageChange = (newLocale: string) => {
-        push('/', undefined, { locale: newLocale });
+        // Preserve the current page path when switching languages
+        push({ pathname, query }, asPath, { locale: newLocale });
         handleLanguageMenuClose();
+    };
+
+    // Function to handle anchor link clicks
+    const handleAnchorClick = (href: string) => {
+        setVisibleMenu(false); // Close the mobile menu
+        const targetElement = document.querySelector(href); // Find the target section
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to the section
+        }
     };
 
     return (
@@ -144,7 +154,7 @@ const Header: FC = () => {
                         <Box />
 
                         {/* Navigation */}
-                        <Navigation />
+                        <Navigation onAnchorClick={handleAnchorClick} />
 
                         {/* Desktop Language Switcher */}
                         <Box

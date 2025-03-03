@@ -165,7 +165,6 @@ const HomeNews: FC = () => {
                         <Button
                             component="a"
                             variant="contained"
-                            color="primary"
                             size="large"
                             sx={{
                                 px: 4,
@@ -173,6 +172,10 @@ const HomeNews: FC = () => {
                                 fontSize: '1.1rem',
                                 textTransform: 'none',
                                 borderRadius: 2,
+                                backgroundColor: '#56bb76', // Default background color
+                                '&:hover': {
+                                    backgroundColor: '#56bb76', // Same as default to remove hover effect
+                                },
                             }}
                         >
                             {t('buttons.viewAllNews', 'عرض جميع الأخبار')}

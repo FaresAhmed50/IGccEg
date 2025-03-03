@@ -34,9 +34,17 @@ const NewsDetail: FC = () => {
     const { t } = useTranslation('common');
     const { locale } = router;
     const [newsItem, setNewsItem] = useState<News | null>(null);
+    const [currentLocale, setCurrentLocale] = useState<string | undefined>(locale);
 
     useEffect(() => {
+        // Check if locale has changed
+        if (currentLocale !== locale) {
+            console.log(`Locale changed from ${currentLocale} to ${locale}`);
+            setCurrentLocale(locale);
+        }
+        
         const loadNews = async () => {
+            console.log(`Loading news data with locale: ${locale}`);
             const data = await loadNewsData(locale || 'en'); // Fetch data based on the current locale
             const item = data.find((item) => item.slug === slug);
             setNewsItem(item || null);
@@ -45,7 +53,7 @@ const NewsDetail: FC = () => {
         if (slug) {
             loadNews();
         }
-    }, [locale, slug]);
+    }, [locale, slug, currentLocale]); // Added currentLocale to dependencies
 
     if (!newsItem) {
         return (
@@ -173,7 +181,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: 'blocking', // Changed from false to 'blocking' to handle new slugs and locales
     };
 };
 

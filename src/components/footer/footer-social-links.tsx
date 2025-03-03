@@ -8,12 +8,12 @@ export const socialLinks: SocialLink[] = [
     {
         name: 'Instagram',
         link: 'https://www.linkedin.com/company/igcc-international-center-for-governance-and-consultancy/',
-        icon: '/images/icons/linkedin.png',
+        icon: '/images/icon/linkedin.png',
     },
     {
         name: 'Facebook', // Corrected the name from 'YouTube' to 'Facebook'
         link: 'https://www.facebook.com/profile.php?id=100046246285800',
-        icon: '/images/icons/facebook.svg',
+        icon: '/images/icon/facebook.svg',
     },
 ];
 
@@ -83,23 +83,27 @@ const SocialLinks: FC = () => {
                     textAlign: 'center', // Center align the content
                 }}
             >
-                {/* Add the "Powered by illustraV" paragraph */}
+                {/* Add the "illustraV" text in white */}
                 <Typography
                     variant="body2"
                     sx={{
-                        color: 'text.secondary',
+                        color: 'primary.contrastText', // Changed to white (contrastText on primary)
                         mb: 1, // Add margin-bottom for spacing
                     }}
                 >
-                    Powered by illustraV
+
                 </Typography>
                 {/* Logo with link */}
-                <a href="https://www.illustrav.com/" target="_blank" rel="noopener noreferrer">
-                    <img
-                        src="https://res.cloudinary.com/dduxyvs3x/image/upload/v1735824579/illustraV_logo.svg"
-                        alt="Logo"
-                    />
-                </a>
+                <Box
+                    sx={{width:'100px'}}
+                >
+                    <a href="https://www.illustrav.com/" target="_blank" rel="noopener noreferrer">
+                        <img
+                            src="https://res.cloudinary.com/dduxyvs3x/image/upload/v1735824579/illustraV_logo.svg"
+                            alt="Logo"
+                        />
+                    </a>
+                </Box>
             </Box>
         </Box>
     );
