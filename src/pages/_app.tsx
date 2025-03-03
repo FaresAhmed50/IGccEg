@@ -37,7 +37,7 @@ const App: FC<AppPropsWithLayout> = (props: AppPropsWithLayout) => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>{t('title')}</title>
       </Head>
-      <div dir={dir} style={{ width: '100%' }}>
+      <div dir={dir} style={{ width: '100%' ,overflowX : "hidden" }}>
         <MUIProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
